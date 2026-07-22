@@ -11,6 +11,7 @@ public class CriaturaDuto : MonoBehaviour
     public bool eyes = false;
     public float timerDeaft;
     public bool death = false;
+    public bool desative = false;
     private void Start()
     {
         for (int i = 0; i <= difficult; i++)
@@ -22,13 +23,17 @@ public class CriaturaDuto : MonoBehaviour
     {
       
         _timer += Time.deltaTime;
-        if (_timer >= cooldown && eyes == false)
+        if (_timer >= cooldown && eyes == false && desative == false)
         {
             _timer = 0;
             RolarNumero();
         }
+        if(desative == true)
+        {
+            numeroGuardado = 0;
+        }
 
-        if (numeroGuardado == difficult && eyes == false)
+        if (numeroGuardado == difficult && eyes == false && desative == false)
         {
             numerosAleatorios.Clear();
             for (int i = 0; i <= difficult; i++)

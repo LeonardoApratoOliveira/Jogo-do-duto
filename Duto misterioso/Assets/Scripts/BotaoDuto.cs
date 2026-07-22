@@ -7,36 +7,38 @@ public class BotaoDuto : MonoBehaviour
     public float timerQuebrar;
     public float timerConsertar;
     public float criaturaSair;
-    private SpriteRenderer sR;
-    public Sprite[] sprites;
+    public Animator animator;
     public bool fechado = false;
     public bool quebrado = false;
+    public float timerAnimation;
 
-
-    private void OnMouseEnter()
+    private void OnMouseDown()
     {
-        if (fechado == false && quebrado == false)
+        if (fechado == false && quebrado == false && timerAnimation >= 0.10f)
         {
-            sR.sprite = sprites[1];
             fechado = true;
             cD.eyes = false;
         }
-        
+
     }
 
-    private void OnMouseExit() 
+    private void OnMouseUp() 
     {
-        sR.sprite = sprites[0];
+        animator.Play("DutoAbrindo");
+        timerAnimation = 0;
         fechado = false;
     }
     private void Update()
     {
         _timer += Time.deltaTime;
-        if (cD.eyes == true && fechado == false)
+        timerAnimation += Time.deltaTime;
+
+        if (timerAnimation >= 0.10f && fechado == true)
         {
-            sR.sprite = sprites[2];
+            animator.Play("DutoFechando");
         }
-        else if (fechado == true && _timer >= criaturaSair && cD.eyes == true)
+
+        if (fechado == true && _timer >= criaturaSair && cD.eyes == true)
         {
             cD.eyes = false;
             _timer = 0;
@@ -49,7 +51,7 @@ public class BotaoDuto : MonoBehaviour
         {
             if (_timer >= timerQuebrar)
             {
-                sR.sprite = sprites[0];
+                animator.Play("DutoAbrindo");
                 quebrado = true;
                 fechado = false;
                 _timer = 0;
@@ -66,6 +68,8 @@ public class BotaoDuto : MonoBehaviour
     }
     private void Start()
     {
-        sR = GetComponent<SpriteRenderer>();
+        timerAnimation = 0.10f;
+        animator.Play("IdleAberto");
+        animator = GetComponent<Animator>();
     }
 }

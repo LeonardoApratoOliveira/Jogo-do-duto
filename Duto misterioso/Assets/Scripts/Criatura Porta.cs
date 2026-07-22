@@ -3,72 +3,78 @@ using UnityEngine;
 public class CriaturaPorta : MonoBehaviour
 {
     public bool ligado = false;
-    public Sprite[] sprites;
-    private SpriteRenderer sR;
+    [SerializeField] private Animator animator;
     [SerializeField] private float _timer;
+    [SerializeField] public float cooldown;
+    [SerializeField] private int usosLuz;
+    [SerializeField] private int limiteLuz;
+    [SerializeField] public bool luzFunciona = true;
     public float trocarFase;
     public int fases;
-    public float timerDeaft;
     public bool death = false;
-    public bool pertoDeMatar = false;
-    public float seSalvar;
+    private int numeroGuardado;
+    public int difficult;
+    private int max;
+    private int min;
+    public bool desative = false;
 
-    private void OnMouseEnter()
+    private void OnMouseDown()
     {
-        if(ligado == false)
+        if (luzFunciona == true && _timer >= cooldown)
         {
             ligado = true;
+            _timer = 0;
+            usosLuz++;
             for (int i = 0; i <= fases; i++)
             {
-                if (i == fases)
-                {
-                    sR.sprite = sprites[i+1];
-                }
+                animator.Play("Fase" + $"{i}");
             }
         }
+        
     }
-
-    private void OnMouseExit()
-    {
-        sR.sprite = sprites[0];
-        ligado = false;
-    }
-
     private void Update()
     {
         _timer += Time.deltaTime;
-        if (_timer>= trocarFase && pertoDeMatar == false)
+        if(usosLuz > limiteLuz && luzFunciona == true)
         {
+            luzFunciona = false;
+            _timer = 0;
+            animator.Play("FaseIdle");
+        }
+
+        if(_timer >= 10 && luzFunciona == false)
+        {
+            _timer = 0;
+            usosLuz = 0;
+            luzFunciona = true;
+        }
+
+        if (ligado == false)
+        {
+            animator.Play("FaseIdle");
+        }
+        if (_timer >= 0.9f)
+        {     
+            ligado = false;
+        }
+        if (_timer >= trocarFase && desative == false)
+        {
+            _timer = 0;
             fases++;
-            _timer = 0;
-            
         }
-
-        if (fases == 3 && pertoDeMatar == false)
-        {
-            pertoDeMatar = true;
-            _timer = 0;
-            
-        }
-
-        if (_timer >= timerDeaft && pertoDeMatar == true)
+        if(fases > 3)
         {
             death = true;
-            Debug.Log("Morte");
+            Debug.Log("morte");
         }
-        else if (_timer >= seSalvar && ligado == true && pertoDeMatar == true)
-        {
-            ligado = false;
-            pertoDeMatar = false;
-            fases = 0;
-            sR.sprite = sprites[0];
-            _timer = 0;
-        }
-
 
     }
-    private void Start()
+    private void Awake()
     {
-        sR = GetComponent<SpriteRenderer>();
+        max = difficult;
+        min = difficult - 5;
+        numeroGuardado = Random.Range(min, max);
+        trocarFase = numeroGuardado;
+        animator = GetComponent<Animator>();
     }
 }
