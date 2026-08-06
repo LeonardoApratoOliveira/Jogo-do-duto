@@ -17,6 +17,8 @@ public class CriaturaPorta : MonoBehaviour
     private int max;
     private int min;
     public bool desative = false;
+    public AudioSource aS;
+    public ParticleSystem pS;
 
     private void OnMouseDown()
     {
@@ -25,24 +27,30 @@ public class CriaturaPorta : MonoBehaviour
             ligado = true;
             _timer = 0;
             usosLuz++;
+            aS.Play();
             for (int i = 0; i <= fases; i++)
             {
                 animator.Play("Fase" + $"{i}");
             }
+            if (_timer < 0) { _timer = 0; }
+        }
+        if (luzFunciona == false && _timer >= cooldown)
+        {
+            pS.Play();
         }
         
     }
     private void Update()
     {
         _timer += Time.deltaTime;
-        if(usosLuz > limiteLuz && luzFunciona == true)
+        if(usosLuz >= limiteLuz && luzFunciona == true)
         {
             luzFunciona = false;
             _timer = 0;
             animator.Play("FaseIdle");
         }
 
-        if(_timer >= 10 && luzFunciona == false)
+        if(_timer >= min && luzFunciona == false)
         {
             _timer = 0;
             usosLuz = 0;
@@ -65,7 +73,6 @@ public class CriaturaPorta : MonoBehaviour
         if(fases > 3)
         {
             death = true;
-            Debug.Log("morte");
         }
 
     }

@@ -13,7 +13,7 @@ public class Timer : MonoBehaviour
     public CriaturaPorta criaturaPorta;
     public CanvasCamera cC;
     public CameraScript cS;
-
+    public AudioSource audioSource;
     void UpdateTimerUi()
     {
         int minutos = Mathf.FloorToInt(timer / 60);
@@ -29,9 +29,9 @@ public class Timer : MonoBehaviour
             timer++;
             _timerReal = 0;
         }
-        if (passarTempo >= 6)
+        if (passarTempo >= 1)
         {
-            passarTempo = 6;
+            passarTempo = 1;
         }
         UpdateTimerUi();
 
@@ -42,7 +42,8 @@ public class Timer : MonoBehaviour
             criaturaPorta.desative = true;
             cD.desative = true;
             victoryWin.SetActive(true);
-            cS.speed = 0;
+            cS.cameraTravada = true;
+            audioSource.Stop();
         }
     }
 
@@ -53,7 +54,7 @@ public class Timer : MonoBehaviour
     }
     private void OnMouseExit()
     {
-        passarTempo = 6;
+        passarTempo = 2;
         animator.Play("PortaIdle");
     }
 

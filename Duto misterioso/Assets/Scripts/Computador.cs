@@ -9,7 +9,7 @@ public class Computador : MonoBehaviour
     private void OnMouseDown()
     {
         meuCanvas.SetActive(true);
-        cS.speed = 0;
+        cS.cameraTravada = true;
     }
 
     private void Start()

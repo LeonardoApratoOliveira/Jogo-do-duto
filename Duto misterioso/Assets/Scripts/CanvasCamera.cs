@@ -18,7 +18,7 @@ public class CanvasCamera : MonoBehaviour
     public void Exit()
     {
         meuCanvas.SetActive(false);
-        cS.speed = 15;
+        cS.cameraTravada = false;
     }
 
 }

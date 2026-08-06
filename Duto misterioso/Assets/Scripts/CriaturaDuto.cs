@@ -12,12 +12,17 @@ public class CriaturaDuto : MonoBehaviour
     public float timerDeaft;
     public bool death = false;
     public bool desative = false;
+    public bool taAqui = false;
+    public AudioSource aS;
+    public CameraScript cS;
+    public BotaoDuto bD;
     private void Start()
     {
         for (int i = 0; i <= difficult; i++)
         {
             numerosAleatorios.Add(i);
         }
+        aS.Stop();
     }
     private void Update()
     {
@@ -33,7 +38,7 @@ public class CriaturaDuto : MonoBehaviour
             numeroGuardado = 0;
         }
 
-        if (numeroGuardado == difficult && eyes == false && desative == false)
+        if (numeroGuardado == difficult && eyes == false && desative == false )
         {
             numerosAleatorios.Clear();
             for (int i = 0; i <= difficult; i++)
@@ -41,6 +46,7 @@ public class CriaturaDuto : MonoBehaviour
                 numerosAleatorios.Add(i);
             }
             Debug.LogWarning("ta aqui");
+            taAqui = true;
             _timer = 0;
             eyes = true;
         }
@@ -49,6 +55,14 @@ public class CriaturaDuto : MonoBehaviour
             death = true;
             Debug.LogErrorFormat("Morte");
         }
+
+        if (cS.posicaoX == 40 && eyes == true && taAqui == true)
+        {
+            aS.Play();  
+            taAqui = false; 
+        }
+        if (cS.posicaoX != 40) { aS.Stop(); taAqui = true; }
+        
     }
 
     public void RolarNumero()

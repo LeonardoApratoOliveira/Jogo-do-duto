@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Duto
   - Porta
+  - Moeda
   layers:
   - Default
   - TransparentFX
