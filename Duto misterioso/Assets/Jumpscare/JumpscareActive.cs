@@ -13,37 +13,14 @@ public class JumpscareActive : MonoBehaviour
     [SerializeField] private float _timer;
     public bool derrotado = false;
     public AudioSource aS;
+    [SerializeField] GameObject gOV;
     private void Update()
     {
         _timer += Time.deltaTime;
         if(cD.death == true && derrotado == false)
         {
             jumpscareDuto.SetActive(true);
-            cC.difficult = 1000;
-            cC.pontos = 10;
-            criaturaPorta.desative = true;
-            cD.desative = true;
-            cS.cameraTravada = true;
-            _timer = 0;
-            derrotado = true;
-            aS.Play();
-        }
-        if (criaturaPorta.death == true && derrotado == false)
-        {
-            jumpscarePorta.SetActive(true);
-            cC.difficult = 1000;
-            cC.pontos = 10;
-            criaturaPorta.desative = true;
-            cD.desative = true;
-            cS.cameraTravada = true;
-            _timer = 0;
-            derrotado = true;
-            aS.Play();
-        }
-        if (cC.death == true && derrotado == false)
-        {
-            jumpscareCamera.SetActive(true);
-            cC.difficult = 1000;
+            cC.difficult = 0;
             cC.pontos = 10;
             criaturaPorta.desative = true;
             cD.desative = true;
@@ -52,6 +29,36 @@ public class JumpscareActive : MonoBehaviour
             derrotado = true;
             aS.Play();
             cD.aS.Stop();
+            Destroy(gOV);
+        }
+        if (criaturaPorta.death == true && derrotado == false)
+        {
+            jumpscarePorta.SetActive(true);
+            cC.difficult = 0;
+            cC.pontos = 10;
+            criaturaPorta.desative = true;
+            cD.desative = true;
+            cS.cameraTravada = true;
+            _timer = 0;
+            derrotado = true;
+            aS.Play();
+            cD.aS.Stop();
+            Destroy(gOV);
+        }
+        if (cC.death == true && derrotado == false)
+        {
+            jumpscareCamera.SetActive(true);
+            cC.difficult = 0;
+            cC.pontos = 10;
+            criaturaPorta.desative = true;
+            cD.desative = true;
+            cS.cameraTravada = true;
+            _timer = 0;
+            derrotado = true;
+            aS.Play();
+            cD.aS.Stop();
+            cD.aS.Stop();
+            Destroy(gOV);
         }
 
         if (_timer >= 1.5f && derrotado == true)

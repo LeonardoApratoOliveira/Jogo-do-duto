@@ -5,10 +5,6 @@ public class Mapa : MonoBehaviour
     public CameraScript cS;
     public Sprite[] sprites;
     public SpriteRenderer sR;
-    void Start()
-    {
-        
-    }
 
     void Update()
     {

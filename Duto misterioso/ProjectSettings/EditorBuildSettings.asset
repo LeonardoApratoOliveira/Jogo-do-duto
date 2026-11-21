@@ -7,15 +7,15 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/Menu.unity
-    guid: 90374294f7de1454d91bedeb767967e2
+    guid: ee4f9bb99c7d7b74496015767ad8bb3a
   - enabled: 1
-    path: Assets/Scenes/JogoNivel1.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
+    path: Assets/Scenes/Jogo.unity
+    guid: 55045c141d680104dae222ca598c23a7
   - enabled: 1
-    path: Assets/Scenes/JogoNivel2.unity
-    guid: 1c06793453fc38143a2dc1b41dcd586e
+    path: Assets/Scenes/Final.unity
+    guid: 33c14232221f70c4d822db20148813ba
   - enabled: 1
-    path: Assets/Scenes/JogoNivel3.unity
-    guid: 41db7e6b854d84542a266abdcd5a5824
+    path: Assets/Scenes/Carta.unity
+    guid: 8d08b052fab73254f9248bb4a55b56cd
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

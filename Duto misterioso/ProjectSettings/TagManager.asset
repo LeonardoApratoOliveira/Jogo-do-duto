@@ -6,7 +6,10 @@ TagManager:
   tags:
   - Duto
   - Porta
-  - Moeda
+  - CriaturaPorta
+  - Camera
+  - Dificuldade
+  - Custom
   layers:
   - Default
   - TransparentFX
@@ -52,6 +55,9 @@ TagManager:
     locked: 0
   - name: New Layer 3
     uniqueID: 814332015
+    locked: 0
+  - name: New Layer 4
+    uniqueID: 2015581399
     locked: 0
   m_RenderingLayers:
   - Default

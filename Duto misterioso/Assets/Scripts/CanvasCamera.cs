@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CanvasCamera : MonoBehaviour
 {
@@ -7,7 +8,7 @@ public class CanvasCamera : MonoBehaviour
     public float difficult;
     public int pontos;
     public int pontosIniciais;
-    public bool death = false;
+    public bool death = false; 
 
     public void Click()
     {
@@ -19,6 +20,7 @@ public class CanvasCamera : MonoBehaviour
     {
         meuCanvas.SetActive(false);
         cS.cameraTravada = false;
+
     }
 
 }

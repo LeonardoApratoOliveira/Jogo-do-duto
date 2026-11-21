@@ -3,54 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 public class CriaturaDuto : MonoBehaviour
 {
-    [SerializeField] public List<int> numerosAleatorios = new List<int>();
+    public int limite;
     public int difficult;
-    [SerializeField] private float _timer;
+    [SerializeField] public float _timer;
     public float cooldown;
-    public int? numeroGuardado;
+    public int numeroGuardado;
     public bool eyes = false;
     public float timerDeaft;
     public bool death = false;
     public bool desative = false;
+    public bool desative2 = false;
     public bool taAqui = false;
     public AudioSource aS;
     public CameraScript cS;
-    public BotaoDuto bD;
+    public GameObject gOP;
     private void Start()
     {
-        for (int i = 0; i <= difficult; i++)
-        {
-            numerosAleatorios.Add(i);
-        }
-        aS.Stop();
+        gOP.SetActive(false);
     }
     private void Update()
     {
       
         _timer += Time.deltaTime;
-        if (_timer >= cooldown && eyes == false && desative == false)
+        if(_timer >= cooldown && desative2 == false)
         {
-            _timer = 0;
             RolarNumero();
-        }
-        if(desative == true)
-        {
-            numeroGuardado = 0;
+            _timer = 0;
         }
 
-        if (numeroGuardado == difficult && eyes == false && desative == false )
-        {
-            numerosAleatorios.Clear();
-            for (int i = 0; i <= difficult; i++)
-            {
-                numerosAleatorios.Add(i);
-            }
-            Debug.LogWarning("ta aqui");
-            taAqui = true;
-            _timer = 0;
-            eyes = true;
-        }
-        if (eyes == true && _timer >= timerDeaft && death == false)
+        if (eyes == true && _timer >= timerDeaft && death == false && desative == false)
         {
             death = true;
             Debug.LogErrorFormat("Morte");
@@ -61,16 +42,26 @@ public class CriaturaDuto : MonoBehaviour
             aS.Play();  
             taAqui = false; 
         }
-        if (cS.posicaoX != 40) { aS.Stop(); taAqui = true; }
-        
+        if (cS.posicaoX != 40) { aS.Stop(); taAqui = true;}
     }
 
     public void RolarNumero()
     {
-        int indiceAleatorio = Random.Range(0, numerosAleatorios.Count);
-        int rolarNumero = numerosAleatorios[indiceAleatorio];
-        numerosAleatorios.RemoveAt(indiceAleatorio);
-        numeroGuardado = rolarNumero;
-        Debug.Log(numeroGuardado);
+        numeroGuardado = Random.Range(0, 100);
+        cooldown = Random.Range(7, 9);
+        if (numeroGuardado <= difficult)
+        {
+            limite++;
+            if(limite >= 2)
+            {
+
+                taAqui = true;
+                limite = 0;
+                gOP.SetActive(true);
+                eyes = true;
+                desative2 = true;
+            }
+        }
+
     }
 }
