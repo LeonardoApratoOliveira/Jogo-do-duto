@@ -119,9 +119,9 @@ public class Timer : MonoBehaviour
 
     private void Tempo()
     {
-        cD.difficult += 4;
-        cC.difficult += 10;
-        criaturaPorta.difficult += 10;
+        cD.difficult += 8;
+        cC.difficult += 8;
+        criaturaPorta.difficult += 9;
 
         cC.pontos = cC.pontos - 1;
         cD.timerDeaft = cD.timerDeaft - 2;

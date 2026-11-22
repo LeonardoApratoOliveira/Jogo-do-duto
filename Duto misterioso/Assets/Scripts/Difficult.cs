@@ -14,9 +14,9 @@ public class Difficult : MonoBehaviour
         if (cNGO != null)
         {
             CustomNight cN = cNGO.GetComponent<CustomNight>();
-            cD.difficult = cN.difficultD * 9;
+            cD.difficult = cN.difficultD * 8;
             CriaPort.difficult = cN.difficultP * 9;
-            cam.difficult = cN.difficultC * 9;
+            cam.difficult = cN.difficultC * 8;
             if(cN.taNoNightmare == true)
             {
                 cameraScript.nigtmare = true;
