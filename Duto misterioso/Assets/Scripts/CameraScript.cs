@@ -114,7 +114,7 @@ public class CameraScript : MonoBehaviour
         void RolarNumero()
         {
             numeroGuardado = Random.Range(0, 100);
-            cooldown = Random.Range(1, 3);
+            cooldown = Random.Range(1, 2);
             if (numeroGuardado <= cC.difficult)
             {
                 limite++;

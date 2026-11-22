@@ -23,8 +23,8 @@ public class GameButton : MonoBehaviour
     public void Play()
     {
         buttonsGame.SetActive(false);
-        playButton.SetActive(true);
-        difficultSelection.SetActive(true);
+        playButton.SetActive(false);
+        challenges.SetActive(true);
         back.SetActive(true);
     }
 
@@ -35,9 +35,10 @@ public class GameButton : MonoBehaviour
 
     public void Challenges()
     {
-        challenges.SetActive(true);
+        difficultSelection.SetActive(true);
         back.SetActive(true);
-        playButton.SetActive(false);
+        challenges.SetActive(false);
+        playButton.SetActive(true);
     }
 
     public void Back()
@@ -136,14 +137,21 @@ public class GameButton : MonoBehaviour
         cN.taEmQualCena++;
         StartCoroutine(IrParaJogo());
     }
+    public void Skip()
+    {
+        SceneManager.LoadScene("Jogo");
+    }
     [SerializeField] GameObject fantasma;
     [SerializeField] GameObject canvasParaNaoClicar;
+    [SerializeField] GameObject historia;
     IEnumerator IrParaJogo()
     {
         gO.SetActive(true);
         fantasma.SetActive(true);
         canvasParaNaoClicar.SetActive(true);
-        yield return new WaitForSeconds(Random.Range(1.5f, 6f));
+        yield return new WaitForSeconds(1f);
+        historia.SetActive(true);
+        yield return new WaitForSeconds(30f);
         SceneManager.LoadScene("Jogo");
     }
 }
