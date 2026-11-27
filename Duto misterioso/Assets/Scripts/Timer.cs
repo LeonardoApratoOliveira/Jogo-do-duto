@@ -20,6 +20,7 @@ public class Timer : MonoBehaviour
     public AudioSource audioSource;
     [SerializeField] private TextMeshProUGUI textoRank;
     [SerializeField] JumpscareActive jA;
+    [SerializeField] AudioSource aS;
     private bool quatroMinutos;
     bool doisMinutos = false;
     void UpdateTimerUi()
@@ -55,27 +56,28 @@ public class Timer : MonoBehaviour
         
         if (timer >= 360 && jA.derrotado == false)
         {
+            aS.Play();
             Destroy(gOV);
             if (cD.difficult <= 65 && cC.difficult <= 65 && criaturaPorta.difficult <= 65)
             {
-                audacia = audacia * 2;
+                audacia = audacia * 1;
             }
             else if (cD.difficult > 65 && cC.difficult > 65 && criaturaPorta.difficult > 65)
             {
                 audacia = audacia * 3;
             }
             
-            if (audacia >= 165)
+            if (audacia >= 340)
             {
                 textoRank.text = "RANK S";
                 textoRank.color = Color.gold;
             }
-            else if (audacia >= 115)
+            else if (audacia >= 290)
             {
                 textoRank.text = "RANK A";
                 textoRank.color = Color.darkCyan;
             }
-            else if (audacia >= 95)
+            else if (audacia >= 160)
             {
                 textoRank.text = "RANK B";
                 textoRank.color = Color.lightSkyBlue;
@@ -108,6 +110,9 @@ public class Timer : MonoBehaviour
         if (timer >= 120 && !doisMinutos)
         {
             doisMinutos=true;
+            cD.difficult += 9;
+            cC.difficult += 9;
+            criaturaPorta.difficult += 9;
             Tempo();
         }
         if(timer >= 240 && quatroMinutos == false)
@@ -119,12 +124,9 @@ public class Timer : MonoBehaviour
 
     private void Tempo()
     {
-        cD.difficult += 8;
-        cC.difficult += 8;
-        criaturaPorta.difficult += 9;
-
         cC.pontos = cC.pontos - 1;
         cD.timerDeaft = cD.timerDeaft - 2;
+        criaturaPorta.cooldown += 0.5f;
     }
 
     private void OnMouseOver()

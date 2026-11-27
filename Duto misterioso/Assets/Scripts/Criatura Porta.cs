@@ -76,7 +76,6 @@ public class CriaturaPorta : MonoBehaviour
         {
             _timer = 0;
             RolarNumero();
-            usosLuz = 0;
         }
         if(fases > 3)
         {
@@ -95,7 +94,7 @@ public class CriaturaPorta : MonoBehaviour
     void RolarNumero()
     {
         numeroGuardado = Random.Range(0, 100);
-        trocarFase = Random.Range(3, 5);
+        trocarFase = Random.Range(4, 6);
         if(numeroGuardado <= difficult)
         {
             limite++;
